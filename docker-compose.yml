@@ -6,7 +6,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - .docker/postgres/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - .docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       POSTGRES_PASSWORD: "password"
       POSTGRES_USER: "postgres"
@@ -21,4 +21,4 @@ services:
       - postgres-database
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@user.com
-      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DEFAULT_PASSWORD: qwezxcfgh1
