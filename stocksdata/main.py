@@ -27,3 +27,17 @@ def create_stocks_data(ticker: str, post_stock_schema: PostStockRequestSchema, s
         )
     )
     return service.save_amount(ticker, post_stock_schema.amount)
+
+
+@app.get('/stock/{ticker}', status_code=HTTPStatus.OK)
+def create_stocks_data(ticker: str, session: Session = Depends(get_session)):
+    service = StocksService(
+        session=session,
+        api_client=PolygonApiClient(
+            host=Settings().POLYGON_HOST,
+            api_key=Settings().POLYGON_API_KEY,
+        )
+    )
+    return service.search(ticker)
+
+

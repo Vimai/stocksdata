@@ -5,12 +5,13 @@ from stocksdata.stocks.models import Stocks
 
 class StocksService:
     def __init__(self, session, api_client):
-        self.__session = session
+        self.session = session
         self.__api_client = api_client
         return
 
-    def search(self, stock):
-        return StocksService().search()
+    def search(self, ticker: str):
+        results = self.session.query(Stocks).filter(Stocks.symbol == ticker).all()
+        return results
 
     def save_amount(self, ticker: str, amount: int):
         open_close_data = self.__api_client.get_open_close_data(
@@ -36,7 +37,7 @@ class StocksService:
 
         stocks.performance = {}
 
-        self.__session.add(stocks)
-        self.__session.commit()
-        self.__session.refresh(stocks)
+        self.session.add(stocks)
+        self.session.commit()
+        self.session.refresh(stocks)
         return stocks
