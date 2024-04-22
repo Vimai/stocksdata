@@ -13,15 +13,15 @@ class Stocks(Base):
     __table_args__ = {"schema": "stocksdata"}
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    symbol = Mapped[str]
+    amount = Mapped[int]
     status: Mapped[str]
     from_date = Mapped[date]
-    symbol = Mapped[str]
     open = Mapped[float]
+    close = Mapped[float]
     high = Mapped[float]
     low = Mapped[float]
-    close = Mapped[float]
     volume = Mapped[int]
-    amount = Mapped[int]
     afterHours = Mapped[float]
     preMarket = Mapped[float]
     performance = Mapped[JSON]

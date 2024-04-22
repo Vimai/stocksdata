@@ -7,3 +7,5 @@ class Settings(BaseSettings):
     )
 
     DATABASE_URL: str
+    POLYGON_HOST: str
+    POLYGON_API_KEY: str
