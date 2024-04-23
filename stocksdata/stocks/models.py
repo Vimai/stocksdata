@@ -1,6 +1,6 @@
 from datetime import date
 
-from sqlalchemy import JSON
+from sqlalchemy import JSON, Column, String, Integer, Float, Date
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -13,15 +13,15 @@ class Stocks(Base):
     __table_args__ = {"schema": "stocksdata"}
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    symbol = Mapped[str]
-    amount = Mapped[int]
+    symbol = Column(String, nullable=False)
+    amount = Column(Integer)
     status: Mapped[str]
-    from_date = Mapped[date]
-    open = Mapped[float]
-    close = Mapped[float]
-    high = Mapped[float]
-    low = Mapped[float]
-    volume = Mapped[int]
+    from_date = Mapped[Date]
+    open = Column(Float)
+    close = Column(Float)
+    high = Column(Float)
+    low = Column(Float)
+    volume = Column(Integer)
     afterHours = Mapped[float]
     preMarket = Mapped[float]
     performance = Mapped[JSON]

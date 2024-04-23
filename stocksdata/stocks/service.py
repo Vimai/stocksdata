@@ -1,5 +1,5 @@
 import json
-from datetime import date
+from datetime import date, datetime
 from functools import lru_cache
 
 from stocksdata.stocks.models import Stocks
@@ -15,6 +15,7 @@ class StocksService:
     @lru_cache(maxsize=5)
     def search(self, ticker: str):
         cache = self.redis_client.get(ticker)
+
         if cache:
             return json.loads(cache)
         results = self.session.query(Stocks).filter(Stocks.symbol == ticker).all()
