@@ -25,3 +25,6 @@ class Stocks(Base):
     afterHours = Mapped[float]
     preMarket = Mapped[float]
     performance = Mapped[JSON]
+
+    def to_dict(self):
+        return {field.name: getattr(self, field.name) for field in self.__table__.c}

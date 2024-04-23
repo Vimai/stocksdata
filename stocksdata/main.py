@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+import redis
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
@@ -24,7 +25,8 @@ def create_stocks_data(ticker: str, post_stock_schema: PostStockRequestSchema, s
         api_client=PolygonApiClient(
             host=Settings().POLYGON_HOST,
             api_key=Settings().POLYGON_API_KEY,
-        )
+        ),
+        redis_client=redis.Redis(host=Settings().REDIS_HOST, port=6379, db=0)
     )
     return service.save_amount(ticker, post_stock_schema.amount)
 
@@ -36,8 +38,7 @@ def create_stocks_data(ticker: str, session: Session = Depends(get_session)):
         api_client=PolygonApiClient(
             host=Settings().POLYGON_HOST,
             api_key=Settings().POLYGON_API_KEY,
-        )
+        ),
+        redis_client=redis.Redis(host=Settings().REDIS_HOST, port=6379, db=0)
     )
     return service.search(ticker)
-
-

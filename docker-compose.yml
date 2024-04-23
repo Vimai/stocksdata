@@ -29,3 +29,17 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@user.com
       PGADMIN_DEFAULT_PASSWORD: qwezxcfgh1
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    environment:
+      - REDIS_PASSWORD=my-password
+      - REDIS_PORT=6379
+    volumes:
+      - redis:/data
+volumes:
+  redis:
+    driver: local
